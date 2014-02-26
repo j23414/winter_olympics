@@ -36,7 +36,7 @@ url<-"http://www.sochi2014.com/en/medal-standings"
 tables<-readHTMLTable(url)
 class(tables) # returns a list
 medal.counts=tables[[1]]
-head(metal.counts)
+head(medal.counts)
 
 # === Scatterplot matrix of the Gold, Silver, and Bronze counts like example? ===
 qplot(Gold, Country, data=medal.counts)
@@ -54,7 +54,7 @@ xmlName(xmlChildren(root)[[2]])
 length(xmlChildren(xmlChildren(root)[[2]]))
 
 s<-getNodeSet(doc, "select")
-xmlChildren(s)
+length(xmlChildren(s))
 # looked at the html file
 # <select name="year" size=10>
 # <option value="2010" > Vancouver 2010</option>
