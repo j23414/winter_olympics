@@ -20,21 +20,43 @@ Excercise 2
 * Make a parallel coordinate plot showing the medal tallies by year (like plot at right?).
 * Write a paragraph summarizing what you elarn about historical medal tallies.
 
-[Class Website](http://dicook.github.io/stat585/index.html)
+**Links:**
+* [Class Website: http://dicook.github.io/stat585/index.html](http://dicook.github.io/stat585/index.html)
+* [metal counts: http://www.sochi2014.com/en/medal-standings](http://www.sochi2014.com/en/medal-standings)
 
 Jennifer Chang
 ```{r fig.width=7, fig.height=6}
-summary(cars)
-```
+# === Load Required Libraries ===
+library(ggplot2)
+#install.packages('XML')
+library(XML)
 
+# === Fetch 2014 Olympic Metal Counts ===
+url<-"http://www.sochi2014.com/en/medal-standings"
+tables<-readHTMLTable(url)
+class(tables) # returns a list
+metal.counts=tables[[1]]
+head(metal.counts)
+
+# === Scatterplot matrix of the Gold, Silver, and Bronze counts like example? ===
+qplot(Gold, Country, data=metal.counts)
+# will need to write a paragraph summarizing the association between metal counts
+
+# === Get Historical Metals ===
+# hmm actually http://www.sochi2014.com/en/medal-history?year=2010 is this year
+year<-seq(from=1924, to=2010, by=4) #drat, this doesn't work, because some of the years are missing on the website... Oh well.
+
+```
 
 Samantha Tyner
 ```{r fig.width=7, fig.height=6}
-plot(cars)
+# place code here
+x<-c(1:10)
 ```
 
 Junzhao Hu
 ```{r fig.width=7, fig.height=6}
-plot(cars)
+# place code here
+x<-c(1:10)
 ```
 
