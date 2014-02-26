@@ -1,16 +1,39 @@
-Title
+2014 Winter Olympics 
 ========================================================
+Team: Jennifer Chang (jenchang), Samantha Tyner (sctyner), Junzhao Hu (junhu)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **Help** toolbar button for more details on using R Markdown).
+Excercise 1
+-----------
+* The Winter Olympics have just finished.  Time to look at the results.
+* Go to the winter olympic games website.
+* Navigate to the medal counts, [metal counts](http://www.sochi2014.com/en/medal-standings)
+* Use the readHTMLTable() function of the XML library to pull out the medal table.
+* Make a scatterplot matrix of the Gold, Silver, Bronze counts (like at the right?)
+* Write a paragraph summarizing the association between medal counts.
 
-When you click the **Knit HTML** button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Excercise 2
+-----------
+* Now look at the historical medals, but you should follow links in order to get to the history data
+* Pull out the total number of medals for all of the years in the historical records.  Using these type of commands will help:
+  * getNodeSet(root, "//option[@value])"  #hmm, this looks like a typo
+  * ldplyr(yearsdetails,function(x) xmlAttrs(x)["value"])
+* Make a parallel coordinate plot showing the medal tallies by year (like plot at right?).
+* Write a paragraph summarizing what you elarn about historical medal tallies.
 
-```{r}
+[Class Website](http://dicook.github.io/stat585/index.html)
+
+Jennifer Chang
+```{r fig.width=7, fig.height=6}
 summary(cars)
 ```
 
-You can also embed plots, for example:
 
+Samantha Tyner
+```{r fig.width=7, fig.height=6}
+plot(cars)
+```
+
+Junzhao Hu
 ```{r fig.width=7, fig.height=6}
 plot(cars)
 ```
