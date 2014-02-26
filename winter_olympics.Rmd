@@ -35,9 +35,7 @@ library(plyr)
 # === Fetch 2014 Olympic Medal Counts ===
 url<-"http://www.sochi2014.com/en/medal-standings"
 tables<-readHTMLTable(url)
-class(tables) # returns a list
 medal.counts=tables[[1]]
-head(medal.counts)
 
 # === Scatterplot matrix of the Gold, Silver, and Bronze counts like example? ===
 qplot(Gold, Country, data=medal.counts)
