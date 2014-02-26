@@ -118,12 +118,21 @@ medal.df<-function(URL){
 }
 
 tables.all<-ldply(URLS,function(x) medal.df(x))
-t
+tables.all$Year<-as.numeric(as.character(tables.all$Year))
+tables.all[,7]<-as.numeric(tables.all[,7])
+tables.all[,6]<-as.numeric(tables.all[,6])
+tables.all[,5]<-as.numeric(tables.all[,5])
+tables.all[,4]<-as.numeric(tables.all[,4])
 
-medal.counts=tables[[1]]
-head(metal.counts)
+medal.counts$Year<-2014
+medal.counts$Total<-as.numeric(medal.counts$Total)
+medal.counts<-medal.counts[,c(7,1:6)]
 
-rep(strsplit('URLS','year=')[[1]][2],nrow(readHTMLTable(x)[[1]]))
+all.medals<-rbind(medal.counts, tables.all)
+
+qplot(data=all.medals,x=Year,y=Total,geom='line',group=Country)
+
+
 
 ```
 
