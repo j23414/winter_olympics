@@ -104,6 +104,10 @@ s<-getNodeSet(doc, "//option[@value >1920]")
 
 #http://www.sochi2014.com/en/medal-history?year=2006&sport=all
 
+years<-ldply(s, function(x) xmlAttrs(x)["value"])
+
+#strsplit('http://www.sochi2014.com/en/medal-history?year=2006','year=')[[1]][2]
+URLS<-paste('http://www.sochi2014.com/en/medal-history?year=',years$value,sep='')
 ```
 
 Junzhao Hu
