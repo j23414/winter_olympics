@@ -80,7 +80,7 @@ medal.counts[,5]<-as.numeric(medal.counts[,5])
 library(GGally)
 ggpairs(data=medal.counts,columns=3:5)
 # will need to write a paragraph summarizing the association between metal counts
-
+#stuff
 # === Get Historical Medals ===
 # hmm actually http://www.sochi2014.com/en/medal-history?year=2010 is this year
 year<-seq(from=1924, to=2010, by=4) #drat, this doesn't work, because some of the years are missing on the website... Oh well.
