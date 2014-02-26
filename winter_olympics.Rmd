@@ -54,7 +54,7 @@ xmlName(xmlChildren(root)[[2]])
 length(xmlChildren(xmlChildren(root)[[2]]))
 
 s<-getNodeSet(doc, "select")
-xmlChildren(s))
+xmlChildren(s)
 # looked at the html file
 # <select name="year" size=10>
 # <option value="2010" > Vancouver 2010</option>
