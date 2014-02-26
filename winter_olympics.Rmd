@@ -24,26 +24,35 @@ Excercise 2
 * [Class Website: http://dicook.github.io/stat585/index.html](http://dicook.github.io/stat585/index.html)
 * [medal counts: http://www.sochi2014.com/en/medal-standings](http://www.sochi2014.com/en/medal-standings)
 
-Jennifer Chang
+Load Required Libraries
 ```{r fig.width=7, fig.height=6}
 # === Load Required Libraries ===
 library(ggplot2)
-#install.packages('XML')
+library(GGally)
 library(XML)
+library(plyr)
+library(dplyr)
+```
 
-# === Fetch 2014 Olympic Medal Counts ===
+Fetch 2014 Olympic Medal Counts
+```{r fig.width=7, fig.height=6}
 url<-"http://www.sochi2014.com/en/medal-standings"
 tables<-readHTMLTable(url)
 class(tables) # returns a list
 medal.counts=tables[[1]]
 head(medal.counts)
-
+medal.counts[,3]<-as.numeric(medal.counts[,3])
+medal.counts[,4]<-as.numeric(medal.counts[,4])
+medal.counts[,5]<-as.numeric(medal.counts[,5])
 # === Scatterplot matrix of the Gold, Silver, and Bronze counts like example? ===
-qplot(Gold, Country, data=medal.counts)
-# will need to write a paragraph summarizing the association between metal counts
+ggpairs(data=medal.counts,columns=3:5)
+```
 
+Paragraph here will need to write a paragraph summarizing the association between metal counts
+
+```{r}
 # === Get Historical Medals ===
-# hmm actually http://www.sochi2014.com/en/medal-history?year=2010 is this year
+# website http://www.sochi2014.com/en/medal-history?year=2010 is this year
 
 url2010<-"http://www.sochi2014.com/en/medal-history?year=2010"
 doc<-htmlParse(url2010)
