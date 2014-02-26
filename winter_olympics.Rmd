@@ -108,6 +108,23 @@ years<-ldply(s, function(x) xmlAttrs(x)["value"])
 
 #strsplit('http://www.sochi2014.com/en/medal-history?year=2006','year=')[[1]][2]
 URLS<-paste('http://www.sochi2014.com/en/medal-history?year=',years$value,sep='')
+
+medal.df<-function(URL){
+  medalcount<-readHTMLTable(URL)[[1]]
+  n<-nrow(medalcount)
+  year<-strsplit(URL,'year=')[[1]][2]
+  yearcol<-rep(year,n)
+  return(cbind(Year=yearcol,medalcount))
+}
+
+tables.all<-ldply(URLS,function(x) medal.df(x))
+t
+
+medal.counts=tables[[1]]
+head(metal.counts)
+
+rep(strsplit('URLS','year=')[[1]][2],nrow(readHTMLTable(x)[[1]]))
+
 ```
 
 Junzhao Hu
