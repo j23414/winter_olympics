@@ -44,20 +44,23 @@ qplot(Gold, Country, data=medal.counts)
 
 # === Get Historical Medals ===
 # hmm actually http://www.sochi2014.com/en/medal-history?year=2010 is this year
-year<-seq(from=1924, to=2010, by=4) #drat, this doesn't work, because some of the years are missing on the website... Oh well.
 
-url<-"http://www.sochi2014.com/en/medal-history?year=2010"
-doc<-htmlParse(url)
+url2010<-"http://www.sochi2014.com/en/medal-history?year=2010"
+doc<-htmlParse(url2010)
 root<-xmlRoot(doc)
 length(xmlChildren(root))
 xmlName(xmlChildren(root)[[2]])
 length(xmlChildren(xmlChildren(root)[[2]]))
 
-s<-getNodeSet(doc, "select")
-length(xmlChildren(s))
+s<-getNodeSet(doc, "//option[@value >1920]")
+
 # looked at the html file
 # <select name="year" size=10>
 # <option value="2010" > Vancouver 2010</option>
+
+#http://www.sochi2014.com/en/medal-history?year=2006&sport=all
+
+years<-ldply(s, function(x) xmlAttrs(x)["value"])
 
 ```
 
