@@ -39,7 +39,7 @@ Create a Scatterplot matrix of the Gold, Silver, and Bronze counts
 ggpairs(data=medal.counts,columns=3:5)
 ```
 
-Paragraph here: will need to write a paragraph summarizing the association between metal counts
+In the scatterplot matrix above, all three plots show a general positive linear trend: the more medals of one kind a country has, the more medals of another kind a country is likely to have.  This probably due to the fact that countries that send the most athletes will win more medals of all kinds by sheer volume! The strongest relationship is between gold and silver, with the weakest relationship between gold and bronze.
 
 Excercise 2: Number of Medals by Country Accross All Years
 -----------
@@ -92,7 +92,7 @@ mutate(Min.medals=min(Total))%.%
 
 qplot(data=big.winners,x=Year,y=Total,geom='line',group=Country,color=Country)
 ```
-Write a paragraph summarizing what you learn about historical medal tallies.
+The historical medal tallies show first that the number of countries participating in the winter Olypics (and winning medals) has increased over the years.  There are also some countries that are only in a few Olympics in the middle of the 20th century.  When looking at the second graph, we see that they are the USSR and the GDR, which stands for German Democratic Republic, also known as East Germany. Both of these countries only existed until about 1990, which is why they stop winning medals! Also, it appears that these communist countries were exceptionally good at winning medals in the years they participated 
 
 <!-- Commentted out anything after this ================
 Samantha Tyner
