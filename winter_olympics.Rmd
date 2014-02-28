@@ -26,16 +26,17 @@ Excercise 1: Gold, Silver and Bronze Medals by Country
 
 
 Fetch 2014 Olympic Medal Counts
-```{r fig.width=7, fig.height=6}
+```{r}
 url<-"http://www.sochi2014.com/en/medal-standings"
 tables<-readHTMLTable(url)
 medal.counts=tables[[1]]
-medal.counts[,3]<-as.numeric(medal.counts[,3])
-medal.counts[,4]<-as.numeric(medal.counts[,4])
-medal.counts[,5]<-as.numeric(medal.counts[,5])
+medal.counts[,3]<-as.numeric(medal.counts[,3]) # Gold
+medal.counts[,4]<-as.numeric(medal.counts[,4]) # Silver
+medal.counts[,5]<-as.numeric(medal.counts[,5]) # Bronze
+medal.counts[,6]<-as.numeric(medal.counts[,6]) # Total
 ```
 Create a Scatterplot matrix of the Gold, Silver, and Bronze counts
-```{r fig.width=7, fig.height=6}
+```{r fig.width=7, fig.height=7}
 ggpairs(data=medal.counts,columns=3:5)
 ```
 
@@ -45,7 +46,7 @@ Excercise 2: Number of Medals by Country Accross All Years
 -----------
 * Now look at the historical medals, but you should follow links in order to get to the history data
 * Pull out the total number of medals for all of the years in the historical records.  Using these type of commands will help:
-  * getNodeSet(root, "//option[@value])"  #hmm, this looks like a typo
+  * getNodeSet(root, "//option[@value]")
   * ldplyr(yearsdetails,function(x) xmlAttrs(x)["value"])
 * Make a parallel coordinate plot showing the medal tallies by year.
 * Write a paragraph summarizing what you learn about historical medal tallies.
@@ -54,8 +55,8 @@ Excercise 2: Number of Medals by Country Accross All Years
 # === Get Historical Medals ===
 url2010<-"http://www.sochi2014.com/en/medal-history?year=2010"
 doc<-htmlParse(url2010)
-s<-getNodeSet(doc, "//option[@value >1920]") # <option value="2010" > Vancouver 2010</option>
-years<-ldply(s, function(x) xmlAttrs(x)["value"])
+opt_nodes<-getNodeSet(doc, "//option[@value >1920]") # <option value="2010" > Vancouver 2010</option>
+years<-ldply(opt_nodes, function(x) xmlAttrs(x)["value"])
 URLS<-paste('http://www.sochi2014.com/en/medal-history?year=',years$value,sep='')
 
 medal.df<-function(URL){
@@ -68,13 +69,12 @@ medal.df<-function(URL){
 
 tables.all<-ldply(URLS,function(x) medal.df(x))
 tables.all$Year<-as.numeric(as.character(tables.all$Year))
-tables.all[,7]<-as.numeric(tables.all[,7])
-tables.all[,6]<-as.numeric(tables.all[,6])
-tables.all[,5]<-as.numeric(tables.all[,5])
-tables.all[,4]<-as.numeric(tables.all[,4])
+tables.all[,7]<-as.numeric(tables.all[,7]) # Total
+tables.all[,6]<-as.numeric(tables.all[,6]) # Bronze
+tables.all[,5]<-as.numeric(tables.all[,5]) # Silver
+tables.all[,4]<-as.numeric(tables.all[,4]) # Gold
 
 medal.counts$Year<-2014
-medal.counts$Total<-as.numeric(medal.counts$Total)
 medal.counts<-medal.counts[,c(7,1:6)]
 
 all.medals<-rbind(medal.counts, tables.all)
@@ -85,7 +85,7 @@ qplot(data=all.medals,x=Year,y=Total,geom='line',group=Country)
 ```
 
 Parallel Coordinate Plot for Countries that win at least 3 medals for all years.
-```{r fig.width=8, fig.height=6}
+```{r fig.width=9.7, fig.height=6}
 big.winners<-group_by(all.medals,Country)%.%
 mutate(Min.medals=min(Total))%.%
   filter(Min.medals>=3)
